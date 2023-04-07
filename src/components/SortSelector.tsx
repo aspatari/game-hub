@@ -17,7 +17,6 @@ function SortSelector({ onSelectSortOrder, sortOrder }: Props) {
         { value: "-rating", label: "Average Rating" },
     ];
     const currentSortOrder = sortOrders.find((order) => order.value === sortOrder);
-    console.log({ sortOrder, currentSortOrder });
 
     return (
         <Menu>
