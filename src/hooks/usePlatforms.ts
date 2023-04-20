@@ -10,7 +10,9 @@ export interface Platform {
 const usePlatoforms = () => {
     return useQuery<FetchResponse<Platform>, Error>({
         queryKey: ["platforms"],
-        queryFn: () => apiClient.get<FetchResponse<Platform>>("/platforms/lists/parents").then((res) => res.data),
+        queryFn: () => {
+            return new apiClient<Platform>("/platforms/lists/parents").getAll();
+        },
         staleTime: 24 * 60 * 60 * 1000, // 24h
     });
 };

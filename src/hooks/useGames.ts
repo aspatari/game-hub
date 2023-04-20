@@ -15,18 +15,16 @@ export interface Game {
 const useGames = (gameQuery: GameQuery) => {
     return useQuery<FetchResponse<Game>, Error>({
         queryKey: ["games", gameQuery],
-        queryFn: () =>
-            apiClient
-                .get<FetchResponse<Game>>("/games", {
-                    params: {
-                        genres: gameQuery.genre?.id,
-                        parent_platforms: gameQuery.platform?.id,
-                        ordering: gameQuery.sortOrder,
-                        search: gameQuery?.searchText,
-                    },
-                })
-                .then((res) => res.data),
+        queryFn: () => {
+            return new apiClient<Game>("/games").getAll({
+                params: {
+                    genres: gameQuery.genre?.id,
+                    parent_platforms: gameQuery.platform?.id,
+                    ordering: gameQuery.sortOrder,
+                    search: gameQuery?.searchText,
+                },
+            });
+        },
     });
 };
-
 export default useGames;
