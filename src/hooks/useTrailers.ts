@@ -4,7 +4,7 @@ import apiClient, { FetchResponse } from "../services/api-client";
 
 const useTrailers = (gameId: number) =>
     useQuery<FetchResponse<Trailer>, Error>({
-        queryKey: ["trailers"],
+        queryKey: ["trailers", gameId],
         queryFn: () => {
             return new apiClient<Trailer>(`/games/${gameId}/movies`).getAll();
         },
