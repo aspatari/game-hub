@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
+import Genre from "../entities/Genre";
 import apiClient, { FetchResponse } from "../services/api-client";
-import { Genre } from "../entities/Genre";
 const useGenres = () => {
     return useQuery<FetchResponse<Genre>, Error>({
         queryKey: ["genres"],
